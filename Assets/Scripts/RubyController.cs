@@ -16,7 +16,14 @@ public class RubyController : MonoBehaviour
     //다른 스크립트에서도 값이 변경되는 것을 방지하기위해 사용
     //프로퍼티 작성은 함수처럼 보이고 사용시 변수로 사용된다
     public int health {get{ return currentHealth; } }
- 
+
+    public float timeInvincible = 2.0f;
+
+    //루비가 무적인지 판별
+    bool isInvincible;
+    //무적 지속시간
+    float invincibleTimer;
+
     void Start()
     {
         //프레임당 유닛 이동 조절
@@ -52,11 +59,32 @@ public class RubyController : MonoBehaviour
 
         //Rigidbody 원하는 위치 이동 과 다른 콜라이더와 충돌시 멈춤
         rigidbody2D.MovePosition(position);
+
+
+        //무적 상태일시
+        if (isInvincible)
+        {
+            //지속시간 - 타이머(시간을 거꾸로센다)
+            invincibleTimer -= Time.deltaTime;
+
+            if (invincibleTimer < 0)
+                isInvincible = false;
+        }
     }
     //캐릭터 체력 변경 함수
     //Clamp 체력값, 최소 체력, 최대체력 설정 체력값이 최소, 최대를 넘지X
     public void ChangeHealth(int amount)
     {
+        //데미지를 입을시
+        if (amount < 0)
+        {
+            //상태확인, 무적일 경우 함수 종료
+            if (isInvincible)
+                return;
+
+            isInvincible = true;
+            invincibleTimer = timeInvincible;
+        }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth +"/"+maxHealth);
     }
