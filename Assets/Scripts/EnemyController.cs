@@ -17,6 +17,9 @@ public class EnemyController : MonoBehaviour
     //로봇상태
     bool broken = true;
 
+    //파티클(연기효과)
+    public ParticleSystem smokeEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +78,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-
+    
     public void Fix()
     {
         broken = false;
@@ -83,6 +86,8 @@ public class EnemyController : MonoBehaviour
         rigidbody2D.simulated = false;
 
         animator.SetTrigger("Fixed");
+
+        smokeEffect.Stop();
     }
 
 
