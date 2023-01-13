@@ -107,6 +107,27 @@ public class RubyController : MonoBehaviour
         {
             Launch();
         }
+
+        //레이캐스트(NPC와 대화하기)
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            //레이는 시작 포인트, 방향 및 길이로 구성됩니다
+            //루비의 발이 아닌 루비 중앙에서 수행, 루비가 바라보는 방향, 최대거리, 특정레이어만 실행을 위해 마스크에 속하지 않을시 무시
+            //레이캐스트가 콜라이더와 닿는지 확인
+            RaycastHit2D hit = Physics2D.Raycast(rigidbody2D.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("NPC"));
+
+            if (hit.collider != null)
+            {
+                //충돌이 있는지 확인한 다음 레이캐스트가 충돌한 오브젝트에서 NonPlayerCharacter 스크립트를 찾습니다.
+                //이 오브젝트에 해당 스크립트가 있는 경우 대화상자를 표시합니다.
+                Debug.Log("Raycast has hit the object " + hit.collider.gameObject);
+                NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
+                if(character != null)
+                {
+                    character.DisplayDialog();
+                }
+            }
+        }
     }
     //캐릭터 체력 변경 함수
     //Clamp 체력값, 최소 체력, 최대체력 설정 체력값이 최소, 최대를 넘지X
@@ -125,6 +146,8 @@ public class RubyController : MonoBehaviour
         }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth + "/" + maxHealth);
+        //maxHealth 대비 currentHealth의 비율값을 UIHealthBar SetValue 함수에 제공합니다.
+        UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
 
     void Launch()
