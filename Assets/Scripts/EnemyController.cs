@@ -20,6 +20,9 @@ public class EnemyController : MonoBehaviour
     //파티클(연기효과)
     public ParticleSystem smokeEffect;
 
+    //얻어 맞는 효과음
+    public AudioClip collectedClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,10 +78,12 @@ public class EnemyController : MonoBehaviour
         if (player != null)
         {
             player.ChangeHealth(-1);
+            player.PlaySound(collectedClip);
         }
     }
 
     
+    //로봇 애니메이션 함수
     public void Fix()
     {
         broken = false;

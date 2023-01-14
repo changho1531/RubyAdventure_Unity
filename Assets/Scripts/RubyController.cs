@@ -32,7 +32,10 @@ public class RubyController : MonoBehaviour
 
     public GameObject projectilePrefab;
 
+    AudioSource audioSource;
 
+    //던지는 효과음
+    public AudioClip collectedClip;
 
     void Start()
     {
@@ -46,7 +49,9 @@ public class RubyController : MonoBehaviour
 
         //게임 시작시 체력 최대치로 설정
         currentHealth = maxHealth;
-        
+
+        //오디오소스 저장
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -106,6 +111,7 @@ public class RubyController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             Launch();
+            PlaySound(collectedClip);
         }
 
         //레이캐스트(NPC와 대화하기)
@@ -161,5 +167,11 @@ public class RubyController : MonoBehaviour
         projectile.Launch(lookDirection, 300);
 
         animator.SetTrigger("Launch");
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+         //PlayOneShot은 오디오 클립을 첫 번째 파라미터로 포함해 오디오 소스의 모든 설정을 통해 오디오 소스에서 오디오 클립을 한 번만 재생합니다.
+        audioSource.PlayOneShot(clip);
     }
 }

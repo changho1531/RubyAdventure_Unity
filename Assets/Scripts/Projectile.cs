@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
     Rigidbody2D rigidbody2D;
+    RubyController controller;
     //Start호출 시점은 오브젝트 생성후 다음 프레임에 호출된다
     //Awake는 오브젝트 생성 즉시(Instantiate가 호출될 때) 호출되므로
     //Launch 호출 전에 Rigidbody2D가 정상적으로 준비됩니다.
@@ -13,6 +15,7 @@ public class Projectile : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
+
 
     //오브젝트에 가해진 힘
     public void Launch(Vector2 direction, float force)
@@ -37,7 +40,9 @@ public class Projectile : MonoBehaviour
         if (e != null)
         {
             e.Fix();
+            
         }
         Destroy(gameObject);
+        
     }
 }

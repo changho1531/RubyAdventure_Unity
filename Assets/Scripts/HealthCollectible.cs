@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthCollectible : MonoBehaviour
 {
+    public AudioClip collectedClip;
     //새 Rigidbody가 Trigger에 진입할 때마다 이 OnTriggerEnter2D 함수를 호출합니다.
     //ther 파리미터는 트리거에 진입한 Collider를 가지고 있다
     private void OnTriggerEnter2D(Collider2D other)
@@ -14,11 +15,12 @@ public class HealthCollectible : MonoBehaviour
         RubyController controller = other.GetComponent<RubyController>();
         if(controller != null)
         {
-            if(controller.health < controller.maxHealth)
+            if(controller.health < controller.maxHealth)//health는 변수(하얀색), playSound는 함수(노란색)
             {
                 controller.ChangeHealth(1);
                 //유니티 기본함수 파라미터로 전달한 것을 제거,스크립트가 부착된 게임 오브젝트를제거
                 Destroy(gameObject);
+                controller.PlaySound(collectedClip);
             }
             
         }
