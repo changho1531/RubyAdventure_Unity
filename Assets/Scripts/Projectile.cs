@@ -18,6 +18,7 @@ public class Projectile : MonoBehaviour
 
 
     //오브젝트에 가해진 힘
+    //캐릭터 방향, 가해질 힘
     public void Launch(Vector2 direction, float force)
     {
         rigidbody2D.AddForce(direction * force);
@@ -26,7 +27,9 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
-        //position은 월드의 중심에서부터 오브젝트의 위치, magnitude는 해당 벡터의 길이가 된다
+        //position은 월드의 중심에서부터 오브젝트의 위치
+        //magnitude는 해당 벡터의 길이가 된다
+        // |-100| => 100 
         if (transform.position.magnitude > 1000.0f)
         {
             Destroy(gameObject);

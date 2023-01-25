@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6740550972341086914}
   - component: {fileID: 6740550972341086917}
-  - component: {fileID: 6740550972341086916}
+  - component: {fileID: 4824256629794400274}
   - component: {fileID: 6740550972341086915}
   - component: {fileID: 4342482828992181619}
   - component: {fileID: 9087104791603594429}
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6740550972341086916
+--- !u!114 &4824256629794400274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,10 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  speed: 4
+  speed: 3
   timeInvincible: 2
   projectilePrefab: {fileID: 8482595124481082838, guid: cc08de849fde46d44906b4edf7593648, type: 3}
-  collectedClip: {fileID: 8300000, guid: b2edfd40873655249ba0e01a5cf705be, type: 3}
+  collectedClip: {fileID: 8300000, guid: 709a835b61b848644946696fdd5e5a4d, type: 3}
 --- !u!50 &6740550972341086915
 Rigidbody2D:
   serializedVersion: 4
